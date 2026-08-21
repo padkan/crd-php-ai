@@ -1,0 +1,155 @@
+# ============================================================
+# OS / System files
+# ============================================================
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+
+# ============================================================
+# IDE / Editors
+# ============================================================
+
+.idea/
+.vscode/
+
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+
+# ============================================================
+# Environment / Secrets
+# ============================================================
+
+.env
+.env.local
+.env.*.local
+
+# Keep example environment files
+!.env.example
+
+
+# ============================================================
+# PHP / Composer
+# ============================================================
+
+/vendor/
+
+.phpunit.result.cache
+.phpunit.cache/
+.phpunit.cache
+
+coverage/
+.php-cs-fixer.cache
+
+
+# ============================================================
+# React / Node / Vite
+# ============================================================
+
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.vite/
+
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Keep frontend example env
+!frontend/.env.example
+
+/frontend/coverage/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# ============================================================
+# TypeScript
+# ============================================================
+
+*.tsbuildinfo
+
+
+# ============================================================
+# Docker
+# ============================================================
+
+# Ignore local Docker override files if used for developer-
+# specific configuration.
+docker-compose.override.yml
+compose.override.yml
+
+
+# ============================================================
+# Database / Local Data
+# ============================================================
+
+/docker/mysql/data/
+/mysql-data/
+/data/mysql/
+
+*.sqlite
+*.sqlite3
+*.db
+
+
+# ============================================================
+# Logs / Runtime
+# ============================================================
+
+/logs/
+/var/log/
+
+*.log
+*.pid
+
+
+# ============================================================
+# Temporary files
+# ============================================================
+
+/tmp/
+/temp/
+
+*.tmp
+*.temp
+*.cache
+
+
+# ============================================================
+# Test artifacts
+# ============================================================
+
+/coverage/
+/test-results/
+
+
+# ============================================================
+# Claude Code
+# ============================================================
+
+# Local Claude settings / machine-specific state
+.claude/settings.local.json
+
+# Keep project instructions in Git
+!CLAUDE.md
+
+# Keep project context documentation
+!context/
+!context/**
+
+
+# ============================================================
+# Local / personal files
+# ============================================================
+
+*.local
+*.bak
+*.backup
