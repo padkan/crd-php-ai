@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A small full-stack Product Management app (PHP 8.5 + React), built as practice for a senior PHP/full-stack coding challenge. The goal is to demonstrate clean, lightweight DDD, REST API design, and a simple React frontend — intentionally small, not a framework showcase. See `context/project-overview.md` (backend/architecture/API contract) and `context/frontend-guidelines.md` (frontend conventions, component layout, state strategy) for the full design spec — read the relevant one before making non-trivial changes in that area.
 
+## Context Files
+
+Read the following to get full context of the project:
+
+- @context/project-overview.md
+- @context/coding-standards.md
+- @context/ai-interaction.md
+- @context/frontend-guidelines.md
+-
+
 ## Commands
 
 There is no local PHP or Composer binary on the host — everything PHP-related runs inside the `php` Docker container.

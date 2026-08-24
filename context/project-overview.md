@@ -694,6 +694,15 @@ Dialog
 
 Avoid installing large numbers of components that are not required.
 
+### Screenshots
+
+refer to the screenshots below as a base for catalog ui . it does not have to be exact. Use it as a reference.
+
+- @context/screenshots/list-product.png
+- @context/screenshots/add-product.png
+- @context/screenshots/edit-product.png
+- @context/screenshots/show-product.png
+
 ---
 
 ## Docker Development Environment
@@ -994,3 +1003,5 @@ DELETE /api/products/{id}
 ```
 
 Keep the UI implementation small, maintainable, and appropriate for a timed coding challenge.
+
+##
