@@ -19,6 +19,7 @@ final readonly class UpdateProduct
     public function execute(
         int $id,
         string $name,
+        string $description,
         int $price,
         string $currency,
     ): Product {
@@ -31,6 +32,7 @@ final readonly class UpdateProduct
         }
 
         $product->rename($name);
+        $product->changeDescription($description);
 
         $product->changePrice(
             new Money(

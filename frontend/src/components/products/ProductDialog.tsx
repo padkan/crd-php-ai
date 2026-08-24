@@ -12,6 +12,8 @@ type ProductDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   product: Product | null;
+  isSubmitting: boolean;
+  submitError: string | null;
   onSubmit: (values: ProductInput) => void;
 };
 
@@ -19,6 +21,8 @@ export function ProductDialog({
   open,
   onOpenChange,
   product,
+  isSubmitting,
+  submitError,
   onSubmit,
 }: ProductDialogProps) {
   const isEditing = product !== null;
@@ -38,6 +42,8 @@ export function ProductDialog({
         <ProductForm
           initialValues={product ?? undefined}
           submitLabel="Save product"
+          isSubmitting={isSubmitting}
+          submitError={submitError}
           onCancel={() => onOpenChange(false)}
           onSubmit={onSubmit}
         />

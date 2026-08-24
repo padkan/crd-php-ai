@@ -29,7 +29,7 @@ final readonly class PdoProductRepository
     public function findById(int $id): ?Product
     {
         $statement = $this->pdo->prepare(
-            'SELECT id, name, price_cents, currency
+            'SELECT id, name, description, price_cents, currency
              FROM products
              WHERE id = :id'
         );
@@ -50,7 +50,7 @@ final readonly class PdoProductRepository
     public function findAll(): array
     {
         $statement = $this->pdo->query(
-            'SELECT id, name, price_cents, currency
+            'SELECT id, name, description, price_cents, currency
              FROM products
              ORDER BY id DESC'
         );
@@ -81,10 +81,12 @@ final readonly class PdoProductRepository
         $statement = $this->pdo->prepare(
             'INSERT INTO products (
                 name,
+                description,
                 price_cents,
                 currency
             ) VALUES (
                 :name,
+                :description,
                 :price_cents,
                 :currency
             )'
@@ -92,6 +94,7 @@ final readonly class PdoProductRepository
 
         $statement->execute([
             'name' => $product->name(),
+            'description' => $product->description(),
             'price_cents' => $product->price()->amount(),
             'currency' => $product->price()->currency(),
         ]);
@@ -109,6 +112,7 @@ final readonly class PdoProductRepository
             'UPDATE products
              SET
                  name = :name,
+                 description = :description,
                  price_cents = :price_cents,
                  currency = :currency
              WHERE id = :id'
@@ -117,6 +121,7 @@ final readonly class PdoProductRepository
         $statement->execute([
             'id' => $product->id(),
             'name' => $product->name(),
+            'description' => $product->description(),
             'price_cents' => $product->price()->amount(),
             'currency' => $product->price()->currency(),
         ]);
@@ -129,6 +134,7 @@ final readonly class PdoProductRepository
         return new Product(
             id: (int) $row['id'],
             name: $row['name'],
+            description: $row['description'],
             price: new Money(
                 amount: (int) $row['price_cents'],
                 currency: $row['currency'],

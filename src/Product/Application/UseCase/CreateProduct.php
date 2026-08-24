@@ -17,6 +17,7 @@ final readonly class CreateProduct
 
     public function execute(
         string $name,
+        string $description,
         int $price,
         string $currency,
     ): Product {
@@ -28,6 +29,7 @@ final readonly class CreateProduct
         $product = new Product(
             id: null,
             name: $name,
+            description: $description,
             price: $money,
         );
 
