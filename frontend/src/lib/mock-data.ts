@@ -7,7 +7,6 @@ export const mockProducts: Product[] = [
     description: "Advanced tools for growing teams.",
     price: 4900,
     currency: "USD",
-    status: "active",
   },
   {
     id: 2,
@@ -15,7 +14,6 @@ export const mockProducts: Product[] = [
     description: "A practical toolkit for a consistent brand.",
     price: 2900,
     currency: "USD",
-    status: "active",
   },
   {
     id: 3,
@@ -23,6 +21,5 @@ export const mockProducts: Product[] = [
     description: "A 60-minute working session with an expert.",
     price: 15000,
     currency: "USD",
-    status: "draft",
   },
 ];
