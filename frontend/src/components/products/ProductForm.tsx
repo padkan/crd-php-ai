@@ -11,6 +11,8 @@ const DEFAULT_CURRENCY = "USD";
 type ProductFormProps = {
   initialValues?: ProductInput;
   submitLabel?: string;
+  isSubmitting?: boolean;
+  submitError?: string | null;
   onCancel: () => void;
   onSubmit: (values: ProductInput) => void;
 };
@@ -18,6 +20,8 @@ type ProductFormProps = {
 export function ProductForm({
   initialValues,
   submitLabel = "Save product",
+  isSubmitting = false,
+  submitError = null,
   onCancel,
   onSubmit,
 }: ProductFormProps) {
@@ -32,24 +36,24 @@ export function ProductForm({
   const [price, setPrice] = useState(
     initialValues ? (initialValues.price / 100).toFixed(2) : "",
   );
-  const [error, setError] = useState<string | null>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (!name.trim()) {
-      setError("Name is required.");
+      setValidationError("Name is required.");
       return;
     }
 
     const priceInCents = Math.round(Number(price) * 100);
 
     if (!Number.isFinite(priceInCents) || priceInCents < 0) {
-      setError("Price must be a valid, non-negative amount.");
+      setValidationError("Price must be a valid, non-negative amount.");
       return;
     }
 
-    setError(null);
+    setValidationError(null);
 
     onSubmit({
       name: name.trim(),
@@ -58,6 +62,8 @@ export function ProductForm({
       currency: initialValues?.currency ?? DEFAULT_CURRENCY,
     });
   }
+
+  const error = validationError ?? submitError;
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -80,6 +86,7 @@ export function ProductForm({
           value={description}
           onChange={(event) => setDescription(event.target.value)}
           placeholder="A short description of this product"
+          maxLength={1000}
         />
       </div>
 
@@ -113,7 +120,9 @@ export function ProductForm({
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancel
         </Button>
-        <Button type="submit">{submitLabel}</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Saving…" : submitLabel}
+        </Button>
       </div>
     </form>
   );

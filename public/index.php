@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 use App\Http\Controller\ProductController;
 use App\Product\Application\UseCase\CreateProduct;
+use App\Product\Application\UseCase\DeleteProduct;
 use App\Product\Application\UseCase\GetProduct;
 use App\Product\Application\UseCase\ListProducts;
+use App\Product\Application\UseCase\UpdateProduct;
 use App\Product\Infrastructure\Persistence\PdoProductRepository;
 use App\Shared\Infrastructure\Database;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,11 +35,15 @@ $productRepository = new PdoProductRepository($pdo);
 $listProducts = new ListProducts($productRepository);
 $getProduct = new GetProduct($productRepository);
 $createProduct = new CreateProduct($productRepository);
+$updateProduct = new UpdateProduct($productRepository);
+$deleteProduct = new DeleteProduct($productRepository);
 
 $productController = new ProductController(
     listProducts: $listProducts,
     getProduct: $getProduct,
     createProduct: $createProduct,
+    updateProduct: $updateProduct,
+    deleteProduct: $deleteProduct,
 );
 
 $routes = require dirname(__DIR__) . '/config/routes.php';
@@ -66,6 +72,15 @@ try {
 
         'products.create' => $productController->create(
             $request,
+        ),
+
+        'products.update' => $productController->update(
+            (int) $parameters['id'],
+            $request,
+        ),
+
+        'products.delete' => $productController->delete(
+            (int) $parameters['id'],
         ),
 
         default => new JsonResponse(

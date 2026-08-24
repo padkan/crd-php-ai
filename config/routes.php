@@ -43,4 +43,32 @@ $routes->add(
     ),
 );
 
+$routes->add(
+    'products.update',
+    new Route(
+        '/api/products/{id}',
+        [
+            '_controller' => 'products.update',
+        ],
+        requirements: [
+            'id' => '\d+',
+        ],
+        methods: ['PUT'],
+    ),
+);
+
+$routes->add(
+    'products.delete',
+    new Route(
+        '/api/products/{id}',
+        [
+            '_controller' => 'products.delete',
+        ],
+        requirements: [
+            'id' => '\d+',
+        ],
+        methods: ['DELETE'],
+    ),
+);
+
 return $routes;

@@ -12,12 +12,16 @@ import type { Product } from "@/types/product";
 
 type DeleteProductDialogProps = {
   product: Product | null;
+  isDeleting: boolean;
+  error: string | null;
   onOpenChange: (open: boolean) => void;
   onConfirm: (product: Product) => void;
 };
 
 export function DeleteProductDialog({
   product,
+  isDeleting,
+  error,
   onOpenChange,
   onConfirm,
 }: DeleteProductDialogProps) {
@@ -32,13 +36,19 @@ export function DeleteProductDialog({
             be undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
+        {error && (
+          <p role="alert" className="text-sm text-destructive">
+            {error}
+          </p>
+        )}
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel disabled={isDeleting}>Cancel</AlertDialogCancel>
           <AlertDialogAction
             variant="destructive"
+            disabled={isDeleting}
             onClick={() => product && onConfirm(product)}
           >
-            Delete
+            {isDeleting ? "Deleting…" : "Delete"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

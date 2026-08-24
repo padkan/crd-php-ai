@@ -9,12 +9,16 @@ use InvalidArgumentException;
 
 final class Product
 {
+    private const int MAX_DESCRIPTION_LENGTH = 1000;
+
     public function __construct(
         private ?int $id,
         private string $name,
+        private string $description,
         private Money $price,
     ) {
         $this->rename($name);
+        $this->changeDescription($description);
     }
 
     public function id(): ?int
@@ -25,6 +29,11 @@ final class Product
     public function name(): string
     {
         return $this->name;
+    }
+
+    public function description(): string
+    {
+        return $this->description;
     }
 
     public function price(): Money
@@ -43,6 +52,20 @@ final class Product
         }
 
         $this->name = $name;
+    }
+
+    public function changeDescription(string $description): void
+    {
+        $description = trim($description);
+
+        if (mb_strlen($description) > self::MAX_DESCRIPTION_LENGTH) {
+            throw new InvalidArgumentException(sprintf(
+                'Product description cannot exceed %d characters.',
+                self::MAX_DESCRIPTION_LENGTH,
+            ));
+        }
+
+        $this->description = $description;
     }
 
     public function changePrice(Money $price): void
